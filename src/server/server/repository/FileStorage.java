@@ -6,6 +6,7 @@ import java.io.FileWriter;
 public class FileStorage implements Repository<String> {
     private static final String LOG_PATH = "src/server/server/repository/history.txt";
 
+    @Override
     public void save(String text){
         try (FileWriter writer = new FileWriter(LOG_PATH, true)){
             writer.write(text);
@@ -15,6 +16,7 @@ public class FileStorage implements Repository<String> {
         }
     }
 
+    @Override
     public String load(){
         StringBuilder stringBuilder = new StringBuilder();
         try (FileReader reader = new FileReader(LOG_PATH);){

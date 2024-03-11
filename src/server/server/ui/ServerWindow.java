@@ -1,6 +1,6 @@
 package server.server.ui;
 
-import server.server.domain.Server;
+import server.server.domain.ServerController;
 import server.server.repository.FileStorage;
 
 import javax.swing.*;
@@ -12,10 +12,10 @@ public class ServerWindow extends JFrame implements ServerView {
     public static final int WIDTH = 400;
     public static final int HEIGHT = 300;
 
-    JButton btnStart, btnStop;
-    JTextArea log;
+    private JButton btnStart, btnStop;
+    private JTextArea log;
 
-    private Server server;
+    private ServerController serverController;
 
     public ServerWindow(){
         setting();
@@ -24,17 +24,21 @@ public class ServerWindow extends JFrame implements ServerView {
         setVisible(true);
     }
 
+    @Override
+    public void setServerController(ServerController serverController) {
+        this.serverController = serverController;
+    }
+
     private void setting() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setResizable(false);
         setTitle("Chat server");
         setLocationRelativeTo(null);
-        server = new Server(this, new FileStorage());
     }
 
-    public Server getConnection(){
-        return server;
+    public ServerController getConnection(){
+        return serverController;
     }
 
     private void createPanel() {
@@ -51,14 +55,14 @@ public class ServerWindow extends JFrame implements ServerView {
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                server.start();
+                serverController.start();
             }
         });
 
         btnStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                server.stop();
+                serverController.stop();
             }
         });
 

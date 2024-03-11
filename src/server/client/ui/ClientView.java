@@ -1,6 +1,23 @@
 package server.client.ui;
 
+import server.client.domain.ClientController;
+
 public interface ClientView {
+
+    /**
+     * Метод для отображения сообщения в GUI
+     * @param message текст сообщения
+     */
     void showMessage(String message);
-    void disconnectFromServer();
+
+    /**
+     * Метод отключения от сервера со стороны сервера
+     */
+    void disconnectedFromServer();
+
+    /**
+     * Сеттер
+     * @param clientController объект, описывающий логику программы
+     */
+    void setClientController(ClientController clientController);
 }
